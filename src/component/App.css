@@ -1,0 +1,26 @@
+.dropDownMenu{
+    width: 90%;
+    margin-bottom: 1em;
+    margin-left: 4em;
+    margin-right: 1em;
+}
+.Label{
+    font-size: 1.5em;
+    margin-left: 3em;
+}
+
+.quantSelector{
+    width: 90%;
+    margin-left: 4em;
+    margin-right: 1em;
+
+}
+.ui.fluid.dropdown {
+    display: block;
+    width: 90%;
+    min-width: 0;
+}
+.submitbtn{
+    margin-bottom: 1em;
+    margin-left: 50%;
+}
