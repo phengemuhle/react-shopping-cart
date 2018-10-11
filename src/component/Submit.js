@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-const Submit = () => {
+const Submit = (props) => {
     return (
         <>
-            <button type="button" className="submitbtn btn btn-danger btn-lg">Submit</button>
+            <button type="button" onClick={props.submit} className="submitbtn btn btn-danger btn-lg">Submit</button>
         </>
     )
 }

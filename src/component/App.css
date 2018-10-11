@@ -1,12 +1,12 @@
 .dropDownMenu{
     width: 90%;
     margin-bottom: 1em;
-    margin-left: 4em;
+    /* margin-left: 50%; */
     margin-right: 1em;
 }
 .Label{
     font-size: 1.5em;
-    margin-left: 3em;
+    margin-left: 2.7em;
 }
 
 .quantSelector{
@@ -16,6 +16,7 @@
 
 }
 .ui.fluid.dropdown {
+    margin-left: 3.9em;
     display: block;
     width: 90%;
     min-width: 0;

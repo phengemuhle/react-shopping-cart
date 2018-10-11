@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-const Quantity = () => {
+const Quantity = (props) => {
     return (
         <form>
-            <label className="Label">Quantity</label><br/ >
-            <input className="quantSelector" type="number" min='0' name="quant" />
+            <label className="Label">Quantity</label><br />
+            <input className="quantSelector" value={props.value} onChange={props.updateQuantity} type="number" min='1' />
         </form>
     )
 }
