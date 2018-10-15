@@ -5,7 +5,6 @@ import CartItems from './CartItems';
 import CartHeader from './CartHeader';
 import DropdownMenu from './Dropdown';
 import Quantity from './Quantity';
-import Total from './Total'
 import Submit from './Submit'
 
 
@@ -26,23 +25,19 @@ const products = [
 
 
 class App extends Component {
-  state = {
-    ChosenItem: [
-      { id: 1, product: { id: 40, name: 'Mediocre Iron Watch', priceInCents: 399 }, quantity: 1 },
-      { id: 2, product: { id: 41, name: 'Heavy Duty Concrete Plate', priceInCents: 499 }, quantity: 2 },
-      { id: 3, product: { id: 42, name: 'Intelligent Paper Knife', priceInCents: 1999 }, quantity: 1 },
-    ],
-    SelectedIds: [],
-    year: "2016",
-    quantity: 1,
+  constructor(props) {
+    super()
+    this.state = {
+      ChosenItem: [],
+      SelectedIds: [],
+      year: "2016",
+      quantity: 1,
+      total: 0
+    }
+    this.submit = this.submit.bind(this)
   }
 
-  //   arr.map(item => {
-  //     if(item === product.map(i => {
-  //       return products
 
-  //     }))
-  // })
 
   updateQuantity = (event) => {
     this.setState({
@@ -57,78 +52,47 @@ class App extends Component {
     })
   }
 
-  // addItemToCart = (product) => {
-  //   var newItem = {
-  //     id: this.state.cartItems.length + 1,
-  //     product: product,
-  //     quantity: 32
-  //   }
-  //   this.setState({
-  //     cartItems: [...this.state.cartItems, newItem]
-  //   })
-  //   // this.setState(function (prevState) {
-  //   //   prevState.cartItems.push(newItem)
-  //   //   return prevState
-  //   // })
-  // }
-
-  // removeItemFromCart = (id) => {
-  //   var newCart = this.state.cartItems.filter(item => {
-  //     return item.id !== id
-  //   })
-  //   this.setState({
-  //     cartItems: newCart
-  //   })
-  // }
-  submit = () => {
-    var newList = this.state.SelectedIds.filter(id => {
-      // use the warmup function to find the product that matches the id
-      // create a new cart item with the product that you found
-      // return that new cart item
+  NewTotal = () => {
+    let newtotal = 0
+    this.state.ChosenItem.map(item => {
+      newtotal += (((item.product.priceInCents) / 100) * this.state.quantity)
     })
-    // update the cart item state with the new list
+    return newtotal
   }
+
+  submit() {
+    var newList = this.state.SelectedIds.map(id => {
+      return products.filter(item => {
+        return item.id === id
+      })
+    })
+    var newItem = newList.map(item => {
+      return {
+        id: this.state.ChosenItem.length + 1,
+        product: item[0],
+        quantity: this.state.quantity
+      }
+    })
+    this.setState({
+      ChosenItem: [...this.state.ChosenItem, ...newItem],
+    })
+  }
+
 
   render() {
     return (
       <div className="App" >
         <CartHeader />
         <CartItems ChosenItem={this.state.ChosenItem} />
-        {/* <Total /> */}
+        <h3>Total: {this.NewTotal()}</h3>
         <Quantity updateQuantity={this.updateQuantity} value={this.state.quantity} />
         <DropdownMenu updateSelected={this.updateSelected} products={products} value={this.state.SelectedId} />
         <Submit submit={this.submit} />
         <CartFooter year={this.state.year} />
-
       </div>
     );
   }
 }
 
+
 export default App;
-
-
-  //   removeItemFromCart = (id) => {
-  //       var newCart = this.state.cartItems.filter(item => {
-  //         return item.id !== id
-  //       })
-  //       this.setState({
-  //         cartItems: newCart
-  //       })
-  //     }
-
-
-
-
-  // quant = (e) => {
-  //       e.preventDefault()
-  //       console.log(e.target.value)
-  //     }
-
-
-// makeBigger = () => {
-//   const newSize = this.state.size + 10
-//   this.setState({
-//     size: newSize
-//   })
-// }
